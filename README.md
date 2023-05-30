@@ -9,7 +9,10 @@ You can view an example of this below.
 
 ```yml
 name: Build and Deploy
-on: [push]
+on:
+  push:
+    branches:
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -18,12 +21,12 @@ jobs:
       uses: actions/checkout@master
 
     - name: Build and Deploy
-      uses: renzhaosy/hexo-deploy-action@master
+      uses: cyolc932/hexo-deploy-action@master
       env:
-        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_REPOSITORY: renzhaosy/renzhaosy.github.io # The repository the action should deploy to.
-        BRANCH: master  # The branch the action should deploy to.
-        PUBLISH_DIR: ./public # The folder the action should deploy.
+        PERSONAL_TOKEN: ${{ secrets.CI_TOKEN }}
+        PUBLISH_REPOSITORY: 用户名/用户名.github.io # 目标存储库 
+        BRANCH: gh-pages  # 目标仓库的分支 
+        PUBLISH_DIR: ./public # 应该部署的文件夹中 
 ```
 
 if you want to make the workflow only triggers on push events to specific branches, you can like this: 
